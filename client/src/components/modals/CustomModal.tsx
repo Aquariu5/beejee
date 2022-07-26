@@ -1,47 +1,55 @@
-import { Button, Checkbox, Dialog, DialogActions, DialogContent,DialogTitle, Grid,TextField, Typography} from '@mui/material';
-import { observer } from 'mobx-react-lite';
-import * as React from 'react';
-import { useEffect,useState } from 'react';
-import {Controller,SubmitHandler, useForm } from 'react-hook-form';
+import {
+  Button,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material'
+import { observer } from 'mobx-react-lite'
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-import { addRow, editRow} from '../../api/dataApi';
-import { IModalData } from '../../interfaces/modals';
-import dataStore from '../../store/data';
-import userStore from '../../store/user';
+import { addRow, editRow } from '../../api/dataApi'
+import { IModalData } from '../../interfaces/modals'
+import dataStore from '../../store/data'
+import userStore from '../../store/user'
 interface ModalProps {
-    open: boolean,
-    setOpen: Function,
-    modalName: 'Добавить' | 'Изменить',
+  open: boolean
+  setOpen: Function
+  modalName: 'Добавить' | 'Изменить'
 }
-export const CustomModal: React.FC<ModalProps> = ({open, setOpen, modalName,}) => {
-  
+export const CustomModal: React.FC<ModalProps> = ({ open, setOpen, modalName }) => {
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const onSubmit: SubmitHandler<IModalData> = (data) => {
     if (modalName == 'Добавить') {
-      addRow(data);
+      addRow(data)
+    } else {
+      editRow(data)
     }
-    else {
-      editRow(data);
-    }
-    setOpen(false);
+    setOpen(false)
   }
 
-  const { register, handleSubmit, control, reset} = useForm<IModalData>({
+  const { register, handleSubmit, control, reset } = useForm<IModalData>({
     defaultValues: {
       name: dataStore.currentTask?.name,
       email: dataStore.currentTask?.email,
       text: dataStore.currentTask?.text,
-    }
-  });
-  const [disabled, setDisabled] = useState<boolean>(false);
+    },
+  })
+  const [disabled, setDisabled] = useState<boolean>(false)
 
   useEffect(() => {
-    setDisabled(modalName === 'Изменить' ? true : false);
-    reset({...dataStore.currentTask});
-  }, [dataStore.currentTask]);
+    setDisabled(modalName === 'Изменить' ? true : false)
+    reset({ ...dataStore.currentTask })
+  }, [dataStore.currentTask])
 
   return (
     <div>
@@ -57,7 +65,7 @@ export const CustomModal: React.FC<ModalProps> = ({open, setOpen, modalName,}) =
               fullWidth
               required
               variant="standard"
-              {...register("name", {required: 'true'})}
+              {...register('name', { required: 'true' })}
             />
             <TextField
               autoFocus
@@ -67,7 +75,7 @@ export const CustomModal: React.FC<ModalProps> = ({open, setOpen, modalName,}) =
               type="email"
               fullWidth
               required
-              {...register("email", {required: 'true'})}
+              {...register('email', { required: 'true' })}
               variant="standard"
             />
             <TextField
@@ -77,7 +85,7 @@ export const CustomModal: React.FC<ModalProps> = ({open, setOpen, modalName,}) =
               type="text"
               fullWidth
               required
-              {...register("text", {required: 'true'})}
+              {...register('text', { required: 'true' })}
               variant="standard"
             />
             <Grid container>
@@ -85,22 +93,21 @@ export const CustomModal: React.FC<ModalProps> = ({open, setOpen, modalName,}) =
               <Controller
                 name="status"
                 control={control}
-                render={({ field }) => <Checkbox disabled={!userStore.isAuth} defaultChecked={dataStore.currentTask?.status} {...field} />}
+                render={({ field }) => (
+                  <Checkbox disabled={!userStore.isAuth} defaultChecked={dataStore.currentTask?.status} {...field} />
+                )}
               />
-
             </Grid>
-           
+
             <DialogActions>
               <Button onClick={handleClose}>Отмена</Button>
               <Button type={'submit'}>Сохранить</Button>
             </DialogActions>
           </form>
-
         </DialogContent>
-        
       </Dialog>
     </div>
-  );
+  )
 }
 
-export default observer(CustomModal);
+export default observer(CustomModal)

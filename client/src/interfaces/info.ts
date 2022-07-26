@@ -1,5 +1,5 @@
 export interface IInfoStore {
-    severity: string
-    message: string
-    open: boolean
+  severity: string
+  message: string
+  open: boolean
 }

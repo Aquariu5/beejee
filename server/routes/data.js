@@ -5,8 +5,8 @@ import { authMiddleware } from "../middleware/auth-middleware.js";
 
 const dataRouter = new Router();
 
-dataRouter.get('/', getTodos);
-dataRouter.post('/', addTodo);
-dataRouter.put('/', authMiddleware, editTodo);
+dataRouter.get("/", getTodos);
+dataRouter.post("/", addTodo);
+dataRouter.put("/", authMiddleware, editTodo);
 
 export default dataRouter;

@@ -1,95 +1,95 @@
-import { makeAutoObservable } from "mobx";
-import { IModalData } from "../interfaces/modals";
-import { ITask, ITaskStore } from "../interfaces/task";
+import { makeAutoObservable } from 'mobx'
+import { IModalData } from '../interfaces/modals'
+import { ITask, ITaskStore } from '../interfaces/task'
 
 class DataStore implements ITaskStore {
-    _count: number;
-    _pages: number;
-    _tasks: ITask[];
-    _page: number;
-    _limit: number;
-    _currentTask: ITask | null;
-    _sortBy: "email" | "name" | "status";
-    _sortDirection: "ASC" | "DESC";
-    constructor() {
-        this._tasks = [];
-        this._page = 1;
-        this._limit = 3;
-        this._currentTask = null;
-        this._count = 0;
-        this._pages = 1;
-        this._sortBy = "name";
-        this._sortDirection = "ASC";
-        makeAutoObservable(this);
-    }
+  _count: number
+  _pages: number
+  _tasks: ITask[]
+  _page: number
+  _limit: number
+  _currentTask: ITask | null
+  _sortBy: 'email' | 'name' | 'status'
+  _sortDirection: 'ASC' | 'DESC'
+  constructor() {
+    this._tasks = []
+    this._page = 1
+    this._limit = 3
+    this._currentTask = null
+    this._count = 0
+    this._pages = 1
+    this._sortBy = 'name'
+    this._sortDirection = 'ASC'
+    makeAutoObservable(this)
+  }
 
-    setCount(count: number) {
-        this._count = count;
-        this._pages = Math.ceil(count / this._limit);
-    }
+  setCount(count: number) {
+    this._count = count
+    this._pages = Math.ceil(count / this._limit)
+  }
 
-    setPage(page: number) {
-        this._page = page;
-    }
-    setLimit(limit: number) {
-        this._limit = limit;
-    }
-    
-    setTasks(tasks: ITask[]) {
-        this._tasks = tasks;
-    }
+  setPage(page: number) {
+    this._page = page
+  }
+  setLimit(limit: number) {
+    this._limit = limit
+  }
 
-    setTask(task: ITask) {
-        this._currentTask = task;
-    }
+  setTasks(tasks: ITask[]) {
+    this._tasks = tasks
+  }
 
-    addTask(task: ITask) {
-        this._count += 1;
-        this._pages = Math.ceil(this._count / this._limit);
-    }
+  setTask(task: ITask) {
+    this._currentTask = task
+  }
 
-    editTask(data: IModalData) {
-        let idx = this._tasks.findIndex(el => el.id === this._currentTask?.id);
-        if (idx != -1) {
-            this._tasks[idx] = {...this._tasks[idx], ...data};
-        }
-    }
+  addTask(task: ITask) {
+    this._count += 1
+    this._pages = Math.ceil(this._count / this._limit)
+  }
 
-    setSortBy(sort: "email" | "name" | "status") {
-        this._sortBy = sort;
+  editTask(data: IModalData) {
+    let idx = this._tasks.findIndex((el) => el.id === this._currentTask?.id)
+    if (idx != -1) {
+      this._tasks[idx] = { ...this._tasks[idx], ...data }
     }
+  }
 
-    setDirection(direction: "ASC" | "DESC") {
-        this._sortDirection = direction;
-    }
+  setSortBy(sort: 'email' | 'name' | 'status') {
+    this._sortBy = sort
+  }
 
-    get currentTask() {
-        return this._currentTask;
-    }
+  setDirection(direction: 'ASC' | 'DESC') {
+    this._sortDirection = direction
+  }
 
-    get tasks() {
-        return this._tasks;
-    }
+  get currentTask() {
+    return this._currentTask
+  }
 
-    get count() {
-        return this._count;
-    }
+  get tasks() {
+    return this._tasks
+  }
 
-    get page() {
-        return this._page;
-    }
+  get count() {
+    return this._count
+  }
 
-    get pages() {
-        return this._pages;
-    }
+  get page() {
+    return this._page
+  }
 
-    get sorBy() {
-        return this._sortBy;
-    }
+  get pages() {
+    return this._pages
+  }
 
-    get sortDirection() {
-        return this._sortDirection;
-    }
+  get sorBy() {
+    return this._sortBy
+  }
+
+  get sortDirection() {
+    return this._sortDirection
+  }
 }
 
-export default new DataStore();
+export default new DataStore()

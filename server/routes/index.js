@@ -4,7 +4,7 @@ import dataRouter from "./data.js";
 
 const router = new Router();
 
-router.use('/auth', authRouter);
-router.use('/data', dataRouter);
+router.use("/auth", authRouter);
+router.use("/data", dataRouter);
 
 export default router;

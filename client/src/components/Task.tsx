@@ -1,19 +1,7 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-  Grid,
-  IconButton,
-  Modal,
-  Pagination,
-  Typography,
-} from '@mui/material'
+import { Box, Card, CardContent, Grid, IconButton, Typography } from '@mui/material'
 import React from 'react'
 
 import { ITask } from '../interfaces/task'
