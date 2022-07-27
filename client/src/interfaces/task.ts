@@ -4,7 +4,7 @@ export interface ITask {
   email: string
   text: string
   status: boolean
-  changed: boolean
+  change: boolean
 }
 
 export enum SortDirectionType {
@@ -19,7 +19,7 @@ export enum SortType {
 }
 
 export interface ITaskStore {
-  _sortBy: 'email' | 'name' | 'status'
+  _sortBy: SortType
   _sortDirection: SortDirectionType
   _pages: number
   _count: number

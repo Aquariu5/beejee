@@ -1,4 +1,3 @@
-import fs from "fs";
 import { APiError } from "../error.js";
 import { Task } from "../models/models.js";
 
@@ -37,10 +36,10 @@ export const editTodo = async (req, res, next) => {
     const { id, text, status } = req.body;
     const task = await Task.findOne({ where: { id } });
     let oldtext = task.text;
-    let oldchanged = task.status;
+    let oldchanged = task.change;
 
     task.update(
-      { text, status, changed: oldtext !== text || oldchanged },
+      { text, status, change: oldtext !== text || oldchanged },
       { where: { id } }
     );
     return res.json(task);

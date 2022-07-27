@@ -16,7 +16,7 @@ import Task from './Task'
 const Tasks: React.FC = () => {
   useEffect(() => {
     getData()
-  }, [dataStore.page, dataStore.sorBy, dataStore.sortDirection, dataStore.pages])
+  }, [dataStore.page, dataStore.sorBy, dataStore.sortDirection, dataStore.count])
 
   const [open, setOpen] = useState<boolean>(false)
   const [openAuth, setOpenAuth] = useState<boolean>(false)

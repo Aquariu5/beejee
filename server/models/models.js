@@ -7,7 +7,7 @@ export const Task = sequelize.define("task", {
   email: { type: DataTypes.STRING, allowNull: false },
   text: { type: DataTypes.STRING, allowNull: false },
   status: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
-  changed: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false },
+  change: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false },
 });
 
 export const User = sequelize.define("user", {

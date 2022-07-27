@@ -35,7 +35,7 @@ const Task: React.FC<TaskProps> = ({ task, edit }) => {
                     {task.email}
                   </Typography>
                   <Box ml={2}>
-                    <small>{task.changed && 'отредактировано администратором'}</small>
+                    <small>{task.change && 'отредактировано администратором'}</small>
                   </Box>
                 </Grid>
               </Grid>
