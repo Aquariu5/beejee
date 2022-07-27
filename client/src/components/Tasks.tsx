@@ -13,7 +13,7 @@ import CustomModal from './modals/CustomModal'
 import SortPanel from './SortPanel'
 import Task from './Task'
 
-const Tasks = () => {
+const Tasks: React.FC = () => {
   useEffect(() => {
     getData()
   }, [dataStore.page, dataStore.sorBy, dataStore.sortDirection, dataStore.pages])

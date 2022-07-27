@@ -1,7 +1,7 @@
 import { IModalAuth } from '../interfaces/modals'
-import { api } from './api'
-import userStore from '../store/user'
 import infoStore from '../store/info'
+import userStore from '../store/user'
+import { api } from './api'
 interface ILogin {
   token: string
 }

@@ -7,9 +7,20 @@ export interface ITask {
   changed: boolean
 }
 
+export enum SortDirectionType {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
+
+export enum SortType {
+  EMAIL = 'email',
+  NAME = 'name',
+  STATUS = 'status',
+}
+
 export interface ITaskStore {
   _sortBy: 'email' | 'name' | 'status'
-  _sortDirection: 'ASC' | 'DESC'
+  _sortDirection: SortDirectionType
   _pages: number
   _count: number
   _tasks: ITask[]

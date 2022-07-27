@@ -1,5 +1,4 @@
 import { Grid } from '@mui/material'
-import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -7,15 +6,16 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 
+import { SortDirectionType, SortType } from '../interfaces/task'
 import dataStore from '../store/data'
 
-const SortPanel = () => {
+const SortPanel: React.FC = () => {
   const changeSortBy = React.useCallback((event: SelectChangeEvent) => {
-    dataStore.setSortBy(event.target.value as 'status' | 'email' | 'name')
+    dataStore.setSortBy(event.target.value as SortType)
   }, [])
 
   const changeDirection = React.useCallback((event: SelectChangeEvent) => {
-    dataStore.setDirection(event.target.value as 'ASC' | 'DESC')
+    dataStore.setDirection(event.target.value as SortDirectionType)
   }, [])
 
   return (

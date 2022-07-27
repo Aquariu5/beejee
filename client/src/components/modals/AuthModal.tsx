@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import TextField from '@mui/material/TextField'
 import * as React from 'react'
-import { useEffect } from 'react'
+import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { login } from '../../api/authApi'
@@ -15,23 +15,23 @@ import { ITask } from '../../interfaces/task'
 interface ModalProps {
   open: boolean
   setOpen: Function
-  task?: ITask
 }
-export const AuthModal: React.FC<ModalProps> = ({ open, setOpen, task }) => {
-  const handleClose = () => {
+export const AuthModal: React.FC<ModalProps> = ({ open, setOpen }) => {
+  const handleClose = useCallback(() => {
     setOpen(false)
-  }
-
-  useEffect(() => {}, [task])
+  }, [setOpen])
 
   const { register, handleSubmit, watch, control, reset } = useForm<IModalAuth>()
 
-  const onSubmit: SubmitHandler<IModalAuth> = async (data) => {
-    const res = await login(data)
-    if (res) {
-      setOpen(false)
-    }
-  }
+  const onSubmit: SubmitHandler<IModalAuth> = useCallback(
+    async (data) => {
+      const res = await login(data)
+      if (res) {
+        setOpen(false)
+      }
+    },
+    [setOpen],
+  )
 
   return (
     <div>

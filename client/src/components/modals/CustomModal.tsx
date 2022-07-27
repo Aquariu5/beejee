@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { addRow, editRow } from '../../api/dataApi'
@@ -28,14 +28,17 @@ export const CustomModal: React.FC<ModalProps> = ({ open, setOpen, modalName }) 
     setOpen(false)
   }
 
-  const onSubmit: SubmitHandler<IModalData> = (data) => {
-    if (modalName == 'Добавить') {
-      addRow(data)
-    } else {
-      editRow(data)
-    }
-    setOpen(false)
-  }
+  const onSubmit: SubmitHandler<IModalData> = useCallback(
+    (data) => {
+      if (modalName == 'Добавить') {
+        addRow(data)
+      } else {
+        editRow(data)
+      }
+      setOpen(false)
+    },
+    [modalName, setOpen],
+  )
 
   const { register, handleSubmit, control, reset } = useForm<IModalData>({
     defaultValues: {

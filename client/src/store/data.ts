@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { IModalData } from '../interfaces/modals'
-import { ITask, ITaskStore } from '../interfaces/task'
+import { ITask, ITaskStore, SortDirectionType, SortType } from '../interfaces/task'
 
 class DataStore implements ITaskStore {
   _count: number
@@ -9,8 +9,8 @@ class DataStore implements ITaskStore {
   _page: number
   _limit: number
   _currentTask: ITask | null
-  _sortBy: 'email' | 'name' | 'status'
-  _sortDirection: 'ASC' | 'DESC'
+  _sortBy: SortType
+  _sortDirection: SortDirectionType
   constructor() {
     this._tasks = []
     this._page = 1
@@ -18,8 +18,8 @@ class DataStore implements ITaskStore {
     this._currentTask = null
     this._count = 0
     this._pages = 1
-    this._sortBy = 'name'
-    this._sortDirection = 'ASC'
+    this._sortBy = SortType.NAME
+    this._sortDirection = SortDirectionType.ASC
     makeAutoObservable(this)
   }
 
@@ -55,11 +55,11 @@ class DataStore implements ITaskStore {
     }
   }
 
-  setSortBy(sort: 'email' | 'name' | 'status') {
+  setSortBy(sort: SortType) {
     this._sortBy = sort
   }
 
-  setDirection(direction: 'ASC' | 'DESC') {
+  setDirection(direction: SortDirectionType) {
     this._sortDirection = direction
   }
 
