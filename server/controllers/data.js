@@ -37,7 +37,12 @@ export const editTodo = async (req, res, next) => {
     const { id, text, status } = req.body;
     const task = await Task.findOne({ where: { id } });
     let oldtext = task.text;
-    task.update({ text, status, changed: oldtext !== text }, { where: { id } });
+    let oldchanged = task.status;
+
+    task.update(
+      { text, status, changed: oldtext !== text || oldchanged },
+      { where: { id } }
+    );
     return res.json(task);
   } catch (e) {
     return next(
