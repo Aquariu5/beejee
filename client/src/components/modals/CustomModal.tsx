@@ -52,7 +52,7 @@ export const CustomModal: React.FC<ModalProps> = ({ open, setOpen, modalName }) 
   useEffect(() => {
     setDisabled(modalName === 'Изменить' ? true : false)
     reset({ ...dataStore.currentTask })
-  }, [dataStore.currentTask])
+  }, [dataStore.currentTask, modalName, reset])
 
   return (
     <div>
